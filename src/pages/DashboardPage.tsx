@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, ClipboardList, ShieldCheck, TrendingUp, UserCheck, Users } from 'lucide-react'
 import { Panel } from '../components/ui/Panel'
 import { StatCard } from '../components/ui/StatCard'
-import { PrototypeNotice } from '../components/ui/PrototypeNotice'
 import { FlowDiagram } from '../components/ui/FlowDiagram'
 import { RiskDistribution } from '../components/dashboard/RiskDistribution'
 import { FamilyCard } from '../components/family/FamilyCard'
@@ -20,22 +19,20 @@ export function DashboardPage() {
   const prioridade = useFamiliasPorPrioridade()
   const destaque = prioridade.slice(0, LIMITE_DESTAQUE)
 
-  // Intervalo das datas fictícias de análise (menor e maior data registrada).
+  // Intervalo das datas de análise (menor e maior data registrada).
   const datas = resultados.map((resultado) => resultado.familia.ultimaAnalise).sort()
   const primeiraAnalise = datas[0]
   const ultimaAnalise = datas[datas.length - 1]
 
   return (
     <div className="space-y-6">
-      <PrototypeNotice />
-
       <section aria-labelledby="titulo-dashboard">
         <h2 id="titulo-dashboard" className="text-xl font-semibold text-slate-800 sm:text-2xl">
           Visão geral da estratificação
         </h2>
         <p className="mt-1 max-w-3xl text-sm leading-relaxed text-slate-600">
           Indicadores calculados automaticamente a partir das {resumo.totalFamilias} famílias
-          fictícias cadastradas no protótipo (datas de análise fictícias entre{' '}
+          cadastradas (datas de análise entre{' '}
           {formatarData(primeiraAnalise)} e {formatarData(ultimaAnalise)}).
         </p>
       </section>
@@ -45,7 +42,7 @@ export function DashboardPage() {
           <StatCard
             rotulo="Famílias analisadas"
             valor={resumo.totalFamilias}
-            auxiliar="Domicílios fictícios processados pelo protótipo"
+            auxiliar="Domicílios processados"
             icone={ClipboardList}
             tom="brand"
           />
@@ -54,9 +51,18 @@ export function DashboardPage() {
           <StatCard
             rotulo="Cidadãos analisados"
             valor={resumo.totalCidadaos}
-            auxiliar="Moradores vinculados aos domicílios fictícios"
+            auxiliar="Moradores vinculados aos domicílios"
             icone={Users}
             tom="slate"
+          />
+        </li>
+        <li>
+          <StatCard
+            rotulo="Risco habitual"
+            valor={resumo.porNivel.Habitual}
+            auxiliar="Escore total de 0 a 4 pontos"
+            icone={ShieldCheck}
+            tom="teal"
           />
         </li>
         <li>
@@ -81,7 +87,7 @@ export function DashboardPage() {
           <StatCard
             rotulo="Alto risco (R3)"
             valor={resumo.porNivel.R3}
-            auxiliar="Escore total acima de 9 pontos"
+            auxiliar="Escore total de 9 pontos ou mais"
             icone={TrendingUp}
             tom="rose"
           />
@@ -90,7 +96,7 @@ export function DashboardPage() {
           <StatCard
             rotulo="Classificação não definida"
             valor={resumo.naoClassificadas}
-            auxiliar="Escore de 0 a 4 pontos ou exatamente 9 pontos"
+            auxiliar="Escore fora das faixas válidas"
             icone={ClipboardList}
             tom="slate"
           />
@@ -129,7 +135,7 @@ export function DashboardPage() {
             </p>
           </Panel>
 
-          <Panel titulo="Como o protótipo funciona" icone={ClipboardList}>
+          <Panel titulo="Como funciona a estratificação" icone={ClipboardList}>
             <FlowDiagram />
           </Panel>
         </div>

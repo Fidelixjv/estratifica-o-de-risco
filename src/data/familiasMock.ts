@@ -1,18 +1,6 @@
 import type { Cidadao, Familia } from '../domain/types'
 
-/**
- * DADOS MOCK — 100% fictícios.
- *
- * Nenhum nome, CPF, CNS, endereço ou dado de saúde real é utilizado.
- * Os identificadores seguem o padrão "Pessoa 01", "FAM-00X" e "DOM-DEMO-00X"
- * justamente para deixar evidente que se trata de simulação acadêmica.
- *
- * As combinações foram montadas para demonstrar todas as faixas da tabela de
- * classificação (R1, R2, R3) e também as pontuações SEM faixa definida
- * (0 a 4 pontos e exatamente 9 pontos).
- */
-
-/** Atalho para evitar repetição dos campos neutros da base fictícia. */
+/** Atalho para evitar repetição dos campos neutros da base de famílias. */
 function cidadao(dados: Partial<Cidadao> & Pick<Cidadao, 'id' | 'nome' | 'dataNascimento' | 'sexo'>): Cidadao {
   return {
     situacaoOcupacional: 'ocupado',
@@ -29,7 +17,7 @@ function cidadao(dados: Partial<Cidadao> & Pick<Cidadao, 'id' | 'nome' | 'dataNa
   }
 }
 
-/** Pressão arterial fictícia dentro dos parâmetros normais. */
+/** Pressão arterial dentro dos parâmetros normais. */
 function pressaoNormal(sistolica: number, diastolica: number, data: string) {
   return { sistolica, diastolica, usaMedicacaoAntiHipertensiva: false, data }
 }
@@ -37,7 +25,7 @@ function pressaoNormal(sistolica: number, diastolica: number, data: string) {
 export const FAMILIAS_MOCK: Familia[] = [
   {
     id: 'FAM-001',
-    identificacao: 'Família 001 — Domicílio DEMO-001',
+    identificacao: 'Família 001 — Domicílio DOM-001',
     situacao: 'Domicílio sem fatores de risco identificados',
     ultimaAnalise: '2026-09-20',
     membros: [
@@ -61,9 +49,9 @@ export const FAMILIAS_MOCK: Familia[] = [
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-001',
-      identificacao: 'Domicílio DEMO-001',
-      localizacaoFicticia: 'Lote fictício 001 — Rua Exemplo, nº 100 (endereço fictício)',
+      id: 'DOM-001',
+      identificacao: 'Domicílio DOM-001',
+      localizacaoFicticia: 'Lote 001 — Rua Exemplo, nº 100',
       numeroMoradores: 2,
       numeroComodos: 3,
       lixoACeuAberto: false,
@@ -73,7 +61,7 @@ export const FAMILIAS_MOCK: Familia[] = [
   },
   {
     id: 'FAM-002',
-    identificacao: 'Família 002 — Domicílio DEMO-002',
+    identificacao: 'Família 002 — Domicílio DOM-002',
     situacao: 'Pessoa idosa com pressão arterial acima do limiar',
     ultimaAnalise: '2026-09-18',
     membros: [
@@ -105,13 +93,13 @@ export const FAMILIAS_MOCK: Familia[] = [
         sexo: 'F',
         situacaoOcupacional: 'ocupado',
         pressaoArterial: pressaoNormal(116, 76, '2026-06-02'),
-        situacoes: ['Estudante com bolsa de estágio fictícia'],
+        situacoes: ['Estudante com bolsa de estágio'],
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-002',
-      identificacao: 'Domicílio DEMO-002',
-      localizacaoFicticia: 'Lote fictício 002 — Rua Exemplo, nº 200 (endereço fictício)',
+      id: 'DOM-002',
+      identificacao: 'Domicílio DOM-002',
+      localizacaoFicticia: 'Lote 002 — Rua Exemplo, nº 200',
       numeroMoradores: 3,
       numeroComodos: 2,
       lixoACeuAberto: false,
@@ -121,7 +109,7 @@ export const FAMILIAS_MOCK: Familia[] = [
   },
   {
     id: 'FAM-003',
-    identificacao: 'Família 003 — Domicílio DEMO-003',
+    identificacao: 'Família 003 — Domicílio DOM-003',
     situacao: 'Pessoa acamada, deficiência física e saneamento inadequado',
     ultimaAnalise: '2026-09-15',
     membros: [
@@ -158,9 +146,9 @@ export const FAMILIAS_MOCK: Familia[] = [
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-003',
-      identificacao: 'Domicílio DEMO-003',
-      localizacaoFicticia: 'Lote fictício 003 — Rua Exemplo, nº 300 (endereço fictício)',
+      id: 'DOM-003',
+      identificacao: 'Domicílio DOM-003',
+      localizacaoFicticia: 'Lote 003 — Rua Exemplo, nº 300',
       numeroMoradores: 3,
       numeroComodos: 2,
       lixoACeuAberto: true,
@@ -170,7 +158,7 @@ export const FAMILIAS_MOCK: Familia[] = [
   },
   {
     id: 'FAM-004',
-    identificacao: 'Família 004 — Domicílio DEMO-004',
+    identificacao: 'Família 004 — Domicílio DOM-004',
     situacao: 'Lactente menor de seis meses e pessoa sem ocupação',
     ultimaAnalise: '2026-09-22',
     membros: [
@@ -188,7 +176,7 @@ export const FAMILIAS_MOCK: Familia[] = [
         dataNascimento: '1991-09-03',
         sexo: 'F',
         situacaoOcupacional: 'desempregado',
-        situacoes: ['Sem ocupação registrada no cadastro fictício'],
+        situacoes: ['Sem ocupação registrada no cadastro'],
       }),
       cidadao({
         id: 'FAM-004/P03',
@@ -201,9 +189,9 @@ export const FAMILIAS_MOCK: Familia[] = [
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-004',
-      identificacao: 'Domicílio DEMO-004',
-      localizacaoFicticia: 'Lote fictício 004 — Rua Exemplo, nº 400 (endereço fictício)',
+      id: 'DOM-004',
+      identificacao: 'Domicílio DOM-004',
+      localizacaoFicticia: 'Lote 004 — Rua Exemplo, nº 400',
       numeroMoradores: 3,
       numeroComodos: 3,
       lixoACeuAberto: false,
@@ -213,7 +201,7 @@ export const FAMILIAS_MOCK: Familia[] = [
   },
   {
     id: 'FAM-005',
-    identificacao: 'Família 005 — Domicílio DEMO-005',
+    identificacao: 'Família 005 — Domicílio DOM-005',
     situacao: 'Concentração elevada de moradores por cômodo',
     ultimaAnalise: '2026-09-12',
     membros: [
@@ -277,9 +265,9 @@ export const FAMILIAS_MOCK: Familia[] = [
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-005',
-      identificacao: 'Domicílio DEMO-005',
-      localizacaoFicticia: 'Lote fictício 005 — Rua Exemplo, nº 500 (endereço fictício)',
+      id: 'DOM-005',
+      identificacao: 'Domicílio DOM-005',
+      localizacaoFicticia: 'Lote 005 — Rua Exemplo, nº 500',
       numeroMoradores: 7,
       numeroComodos: 2,
       lixoACeuAberto: false,
@@ -289,7 +277,7 @@ export const FAMILIAS_MOCK: Familia[] = [
   },
   {
     id: 'FAM-006',
-    identificacao: 'Família 006 — Domicílio DEMO-006',
+    identificacao: 'Família 006 — Domicílio DOM-006',
     situacao: 'Uso de substâncias, falta de ocupação e analfabetismo',
     ultimaAnalise: '2026-09-19',
     membros: [
@@ -302,7 +290,7 @@ export const FAMILIAS_MOCK: Familia[] = [
         alfabetizacao: 'analfabeto',
         drogadicao: true,
         situacoes: [
-          'Uso de álcool registrado no acompanhamento fictício',
+          'Uso de álcool registrado no acompanhamento',
           'Sem ocupação registrada',
           'Assina apenas o próprio nome',
         ],
@@ -326,9 +314,9 @@ export const FAMILIAS_MOCK: Familia[] = [
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-006',
-      identificacao: 'Domicílio DEMO-006',
-      localizacaoFicticia: 'Lote fictício 006 — Rua Exemplo, nº 600 (endereço fictício)',
+      id: 'DOM-006',
+      identificacao: 'Domicílio DOM-006',
+      localizacaoFicticia: 'Lote 006 — Rua Exemplo, nº 600',
       numeroMoradores: 3,
       numeroComodos: 3,
       lixoACeuAberto: false,
@@ -338,7 +326,7 @@ export const FAMILIAS_MOCK: Familia[] = [
   },
   {
     id: 'FAM-007',
-    identificacao: 'Família 007 — Domicílio DEMO-007',
+    identificacao: 'Família 007 — Domicílio DOM-007',
     situacao: 'Pessoa acamada e água sem tratamento no domicílio',
     ultimaAnalise: '2026-09-10',
     membros: [
@@ -385,9 +373,9 @@ export const FAMILIAS_MOCK: Familia[] = [
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-007',
-      identificacao: 'Domicílio DEMO-007',
-      localizacaoFicticia: 'Lote fictício 007 — Rua Exemplo, nº 700 (endereço fictício)',
+      id: 'DOM-007',
+      identificacao: 'Domicílio DOM-007',
+      localizacaoFicticia: 'Lote 007 — Rua Exemplo, nº 700',
       numeroMoradores: 5,
       numeroComodos: 2,
       lixoACeuAberto: false,
@@ -397,7 +385,7 @@ export const FAMILIAS_MOCK: Familia[] = [
   },
   {
     id: 'FAM-008',
-    identificacao: 'Família 008 — Domicílio DEMO-008',
+    identificacao: 'Família 008 — Domicílio DOM-008',
     situacao: 'Deficiência mental e diabetes mellitus',
     ultimaAnalise: '2026-09-17',
     membros: [
@@ -418,7 +406,7 @@ export const FAMILIAS_MOCK: Familia[] = [
         situacaoOcupacional: 'ocupado',
         diabetes: true,
         pressaoArterial: pressaoNormal(126, 84, '2026-05-19'),
-        situacoes: ['Diabetes mellitus registrada no acompanhamento fictício'],
+        situacoes: ['Diabetes mellitus registrada no acompanhamento'],
       }),
       cidadao({
         id: 'FAM-008/P03',
@@ -431,9 +419,9 @@ export const FAMILIAS_MOCK: Familia[] = [
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-008',
-      identificacao: 'Domicílio DEMO-008',
-      localizacaoFicticia: 'Lote fictício 008 — Rua Exemplo, nº 800 (endereço fictício)',
+      id: 'DOM-008',
+      identificacao: 'Domicílio DOM-008',
+      localizacaoFicticia: 'Lote 008 — Rua Exemplo, nº 800',
       numeroMoradores: 3,
       numeroComodos: 3,
       lixoACeuAberto: false,
@@ -443,7 +431,7 @@ export const FAMILIAS_MOCK: Familia[] = [
   },
   {
     id: 'FAM-009',
-    identificacao: 'Família 009 — Domicílio DEMO-009',
+    identificacao: 'Família 009 — Domicílio DOM-009',
     situacao: 'Criança com desnutrição grave e pessoa idosa com diabetes',
     ultimaAnalise: '2026-09-16',
     membros: [
@@ -484,9 +472,9 @@ export const FAMILIAS_MOCK: Familia[] = [
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-009',
-      identificacao: 'Domicílio DEMO-009',
-      localizacaoFicticia: 'Lote fictício 009 — Rua Exemplo, nº 900 (endereço fictício)',
+      id: 'DOM-009',
+      identificacao: 'Domicílio DOM-009',
+      localizacaoFicticia: 'Lote 009 — Rua Exemplo, nº 900',
       numeroMoradores: 4,
       numeroComodos: 2,
       lixoACeuAberto: false,
@@ -496,7 +484,7 @@ export const FAMILIAS_MOCK: Familia[] = [
   },
   {
     id: 'FAM-010',
-    identificacao: 'Família 010 — Domicílio DEMO-010',
+    identificacao: 'Família 010 — Domicílio DOM-010',
     situacao: 'Múltiplas sentinelas no mesmo domicílio',
     ultimaAnalise: '2026-09-21',
     membros: [
@@ -522,7 +510,7 @@ export const FAMILIAS_MOCK: Familia[] = [
         alfabetizacao: 'analfabeto',
         drogadicao: true,
         situacoes: [
-          'Uso de álcool registrado no acompanhamento fictício',
+          'Uso de álcool registrado no acompanhamento',
           'Sem ocupação registrada',
           'Assina apenas o próprio nome',
         ],
@@ -561,9 +549,9 @@ export const FAMILIAS_MOCK: Familia[] = [
       }),
     ],
     domicilio: {
-      id: 'DOM-DEMO-010',
-      identificacao: 'Domicílio DEMO-010',
-      localizacaoFicticia: 'Lote fictício 010 — Rua Exemplo, nº 1000 (endereço fictício)',
+      id: 'DOM-010',
+      identificacao: 'Domicílio DOM-010',
+      localizacaoFicticia: 'Lote 010 — Rua Exemplo, nº 1000',
       numeroMoradores: 6,
       numeroComodos: 2,
       lixoACeuAberto: false,

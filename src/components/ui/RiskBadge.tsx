@@ -6,6 +6,7 @@ interface RiskBadgeProps {
 }
 
 const ESTILOS = {
+  Habitual: 'bg-teal-50 text-teal-800 ring-teal-200',
   R1: 'bg-emerald-50 text-emerald-800 ring-emerald-200',
   R2: 'bg-amber-50 text-amber-900 ring-amber-200',
   R3: 'bg-rose-50 text-rose-800 ring-rose-200',
@@ -27,9 +28,11 @@ export function RiskBadge({ classificacao, tamanho = 'md' }: RiskBadgeProps) {
         estilo,
       ].join(' ')}
     >
-      <span aria-hidden="true" className="font-mono">
-        {classificacao.nivel ?? '—'}
-      </span>
+      {classificacao.nivel !== 'Habitual' && (
+        <span aria-hidden="true" className="font-mono">
+          {classificacao.nivel ?? '—'}
+        </span>
+      )}
       <span>{classificacao.descricao}</span>
     </span>
   )

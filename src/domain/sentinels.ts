@@ -5,8 +5,8 @@ import { idadeAnosCompletos, idadeMesesCompletos } from '../lib/idade'
  * Tabela de sentinelas (critérios de vulnerabilidade) e pontuações.
  *
  * Regras do projeto:
- *  1. NENHUM ponto é escrito manualmente nos dados mockados: cada sentinela é
- *     avaliada a partir dos dados fictícios do cidadão/domicílio.
+ *  1. NENHUM ponto é escrito manualmente nos dados: cada sentinela é avaliada
+ *     a partir das informações do cidadão e do domicílio.
  *  2. Cada regra tem UMA única definição. O mesmo predicado (`condicao`) é
  *     usado para avaliar a família inteira e para exibir as condições no cartão
  *     do cidadão, evitando divergência entre cálculo e interface.
@@ -62,7 +62,7 @@ export const FAIXAS_MORADOR_COMODO = [
 /**
  * Idade a partir da qual a pessoa é considerada em idade escolar para fins de
  * analfabetismo. A metodologia diz apenas "a partir da idade escolar", sem fixar
- * o valor: o protótipo adota 6 anos.
+ * o valor: adota-se 6 anos.
  * QUESTÃO EM ABERTO — ajustar conforme a versão oficial da metodologia.
  */
 export const IDADE_ESCOLAR_MINIMA_ANOS = 6
@@ -256,7 +256,7 @@ export const DEFINICOES_SENTINELAS: DefinicaoSentinela[] = [
     rotuloCidadao: 'Desnutrição grave',
     definicao: `Condição de desnutrição grave avaliada pela metodologia em menores de ${IDADE_MAXIMA_DESNUTRICAO_ANOS} anos.`,
     // A metodologia não define o critério antropométrico: considera-se a condição
-    // já registrada no cadastro fictício, limitada à faixa etária informada.
+    // já registrada no cadastro, limitada à faixa etária informada.
     condicao: (cidadao) =>
       cidadao.desnutricaoGrave &&
       idadeAnosCompletos(cidadao.dataNascimento) < IDADE_MAXIMA_DESNUTRICAO_ANOS,
@@ -337,7 +337,7 @@ export const DEFINICOES_SENTINELAS: DefinicaoSentinela[] = [
     definicao:
       'Grupo de doenças metabólicas caracterizadas por hiperglicemia e associadas a complicações, disfunções e insuficiência de vários órgãos.',
     // A metodologia descreve o grupo de doenças sem critério operacional:
-    // considera-se o registro do diagnóstico no cadastro fictício.
+    // considera-se o registro do diagnóstico no cadastro.
     condicao: (cidadao) => cidadao.diabetes,
     semEvidencia: 'Nenhum morador com diabetes mellitus registrada.',
     comEvidencia: (membros) => `Diabetes mellitus registrado para: ${nomes(membros)}.`,
@@ -353,7 +353,7 @@ export const DEFINICOES_SENTINELAS: DefinicaoSentinela[] = [
 
       if (numeroComodos <= 0) {
         return naoIdentificado(
-          'Número de cômodos não informado no cadastro fictício: relação não calculável.',
+          'Número de cômodos não informado no cadastro: relação não calculável.',
         )
       }
 

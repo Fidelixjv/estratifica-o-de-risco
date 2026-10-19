@@ -13,7 +13,7 @@ export interface ResumoRisco {
 }
 
 export function resumirRisco(resultados: ResultadoEstratificacao[]): ResumoRisco {
-  const porNivel: Record<NivelRisco, number> = { R1: 0, R2: 0, R3: 0 }
+  const porNivel: Record<NivelRisco, number> = { Habitual: 0, R1: 0, R2: 0, R3: 0 }
   let totalCidadaos = 0
   let somaPontuacoes = 0
   let maiorPontuacao = 0

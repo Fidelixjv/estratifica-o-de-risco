@@ -43,7 +43,7 @@ function ItemCondicao({ ativa, children }: { ativa: boolean; children: React.Rea
   )
 }
 
-/** Cartão de um cidadão fictício vinculado ao domicílio. */
+/** Cartão de um cidadão vinculado ao domicílio. */
 export function CitizenCard({ cidadao, condicoes, sentinelas, rotuloOcupacao }: CitizenCardProps) {
   const idadeMeses = idadeMesesCompletos(cidadao.dataNascimento)
   const pressao = cidadao.pressaoArterial
@@ -58,7 +58,7 @@ export function CitizenCard({ cidadao, condicoes, sentinelas, rotuloOcupacao }: 
       </header>
 
       <p className="mt-1 text-xs text-slate-500">
-        Identificador fictício: <span className="font-mono">{cidadao.id}</span> · Ocupação:{' '}
+        Identificador: <span className="font-mono">{cidadao.id}</span> · Ocupação:{' '}
         {rotuloOcupacao}
       </p>
 
@@ -75,7 +75,7 @@ export function CitizenCard({ cidadao, condicoes, sentinelas, rotuloOcupacao }: 
 
       {pressao && (
         <p className="mt-3 text-xs text-slate-500">
-          Última pressão arterial registrada (fictícia):{' '}
+          Última pressão arterial registrada:{' '}
           <span className="font-semibold text-slate-700">
             {pressao.sistolica}x{pressao.diastolica} mmHg
           </span>{' '}

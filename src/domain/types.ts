@@ -1,19 +1,7 @@
-/**
- * Tipos do domínio do protótipo.
- *
- * Todos os registros aqui representados são FICTÍCIOS. Nomes, datas de nascimento,
- * identificadores e condições de saúde foram criados exclusivamente para a
- * demonstração acadêmica e não correspondem a pessoas ou domicílios reais.
- *
- * Em uma implementação real, estes dados seriam obtidos do Prontuário
- * Eletrônico do Cidadão (PEC). Neste protótipo não existe integração com o
- * PEC: os dados vêm de arquivos mockados em `src/data`.
- */
-
 export type Sexo = 'F' | 'M' | 'Outro'
 
 /**
- * Situação ocupacional registrada no cadastro fictício.
+ * Situação ocupacional registrada no cadastro.
  *
  * Observação metodológica: a sentinela DESEMPREGO considera apenas quem não
  * exerce nenhuma ocupação, não computando férias, licenças ou afastamentos
@@ -22,10 +10,10 @@ export type Sexo = 'F' | 'M' | 'Outro'
  */
 export type SituacaoOcupacional = 'ocupado' | 'naoRemunerado' | 'desempregado'
 
-/** Alfabetização registrada no cadastro fictício. */
+/** Alfabetização registrada no cadastro. */
 export type Alfabetizacao = 'alfabetizado' | 'analfabeto'
 
-/** Medição de pressão arterial registrada no acompanhamento fictício. */
+/** Medição de pressão arterial registrada no acompanhamento. */
 export interface MedicaoPressaoArterial {
   sistolica: number
   diastolica: number
@@ -33,12 +21,10 @@ export interface MedicaoPressaoArterial {
   data: string
 }
 
-/** Cidadão (membro da família) vinculado a um domicílio. Dados fictícios. */
+/** Cidadão (membro da família) vinculado a um domicílio. */
 export interface Cidadao {
   id: string
-  /** Identificação fictícia no formato "Pessoa 01". Nunca um nome real. */
   nome: string
-  /** Data de nascimento fictícia no formato ISO (AAAA-MM-DD). */
   dataNascimento: string
   sexo: Sexo
   situacaoOcupacional: SituacaoOcupacional
@@ -56,15 +42,15 @@ export interface Cidadao {
   drogadicao: boolean
   diabetes: boolean
   pressaoArterial: MedicaoPressaoArterial | null
-  /** Situações identificadas, em linguagem simplificada (texto fictício). */
+  /** Situações identificadas, em linguagem simplificada. */
   situacoes: string[]
 }
 
-/** Informações do domicílio necessárias ao cálculo. Dados fictícios. */
+/** Informações do domicílio necessárias ao cálculo. */
 export interface Domicilio {
   id: string
   identificacao: string
-  /** Referência de localização inteiramente fictícia. */
+  /** Referência de localização do domicílio. */
   localizacaoFicticia: string
   numeroMoradores: number
   /** Compartimentos do domicílio, incluindo cozinha e banheiro quando separados por paredes. */
@@ -74,12 +60,12 @@ export interface Domicilio {
   esgotoACeuAberto: boolean
 }
 
-/** Família (moradores + domicílio) analisável pelo protótipo. */
+/** Família (moradores + domicílio) analisável pelo sistema. */
 export interface Familia {
   id: string
   identificacao: string
   situacao: string
-  /** Data fictícia da última análise realizada pelo protótipo (ISO). */
+  /** Data da última análise realizada (ISO). */
   ultimaAnalise: string
   membros: Cidadao[]
   domicilio: Domicilio

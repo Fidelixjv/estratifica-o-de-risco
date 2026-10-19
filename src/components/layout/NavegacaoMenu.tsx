@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { FlaskConical, HeartPulse } from 'lucide-react'
+import { HeartPulse } from 'lucide-react'
 import { ITENS_NAVEGACAO } from '../../config/navegacao'
 
 interface NavegacaoMenuProps {
@@ -21,7 +21,6 @@ export function NavegacaoMenu({ onNavegar }: NavegacaoMenuProps) {
           <span className="block text-sm font-semibold leading-tight text-slate-800">
             Estratificação de Risco Familiar
           </span>
-          <span className="block text-xs text-slate-500">Protótipo acadêmico</span>
         </span>
       </div>
 
@@ -69,16 +68,6 @@ export function NavegacaoMenu({ onNavegar }: NavegacaoMenuProps) {
           ))}
         </ul>
       </nav>
-
-      <div className="border-t border-slate-200 p-4">
-        <p className="flex items-start gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-800">
-          <FlaskConical aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
-          <span>
-            <strong className="font-semibold">Dados fictícios.</strong> Este protótipo não se
-            conecta ao Prontuário Eletrônico do Cidadão e não utiliza dados reais.
-          </span>
-        </p>
-      </div>
     </div>
   )
 }

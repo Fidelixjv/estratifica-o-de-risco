@@ -3,7 +3,6 @@ import { AppLayout } from './components/layout/AppLayout'
 import { DashboardPage } from './pages/DashboardPage'
 import { FamiliasPage } from './pages/FamiliasPage'
 import { FamiliaDetalhePage } from './pages/FamiliaDetalhePage'
-import { SobrePage } from './pages/SobrePage'
 import { NaoEncontradaPage } from './pages/NaoEncontradaPage'
 
 export default function App() {
@@ -14,7 +13,6 @@ export default function App() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/familias" element={<FamiliasPage />} />
           <Route path="/familias/:id" element={<FamiliaDetalhePage />} />
-          <Route path="/sobre" element={<SobrePage />} />
           <Route path="*" element={<NaoEncontradaPage />} />
         </Route>
       </Routes>

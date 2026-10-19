@@ -9,7 +9,7 @@ export function NaoEncontradaPage() {
   return (
     <EmptyState
       titulo="Página não encontrada"
-      descricao="O endereço acessado não existe no protótipo. Use o menu para continuar a demonstração."
+      descricao="O endereço acessado não existe. Use o menu para continuar."
       icone={SearchX}
     >
       <Link

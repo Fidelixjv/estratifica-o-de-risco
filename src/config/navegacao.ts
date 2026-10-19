@@ -1,4 +1,4 @@
-import { Info, LayoutDashboard, Users, type LucideIcon } from 'lucide-react'
+import { LayoutDashboard, Users, type LucideIcon } from 'lucide-react'
 
 export interface ItemNavegacao {
   para: string
@@ -7,7 +7,7 @@ export interface ItemNavegacao {
   icone: LucideIcon
 }
 
-/** Itens de navegação do protótipo, compartilhados entre menu lateral e menu móvel. */
+/** Itens de navegação compartilhados entre menu lateral e menu móvel. */
 export const ITENS_NAVEGACAO: ItemNavegacao[] = [
   {
     para: '/',
@@ -18,14 +18,8 @@ export const ITENS_NAVEGACAO: ItemNavegacao[] = [
   {
     para: '/familias',
     rotulo: 'Famílias',
-    descricao: 'Listagem das famílias fictícias',
+    descricao: 'Listagem das famílias',
     icone: Users,
-  },
-  {
-    para: '/sobre',
-    rotulo: 'Sobre o projeto',
-    descricao: 'Objetivo e metodologia',
-    icone: Info,
   },
 ]
 

@@ -16,8 +16,7 @@ export function FamilyTable({ resultados }: FamilyTableProps) {
     <div className="relative overflow-x-auto">
       <table className="w-full min-w-[40rem] border-collapse text-left text-sm">
         <caption className="sr-only">
-          Famílias fictícias analisadas, com número de moradores, pontuação e classificação de
-          risco.
+          Famílias analisadas, com número de moradores, pontuação e classificação de risco.
         </caption>
         <thead>
           <tr className="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500">

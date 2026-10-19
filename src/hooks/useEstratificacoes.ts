@@ -6,10 +6,10 @@ import type { ResultadoEstratificacao } from '../domain/estratificacao'
 import type { ResumoRisco } from '../domain/estatisticas'
 
 /**
- * Análise de todas as famílias mockadas.
+ * Análise de todas as famílias cadastradas.
  *
  * O cálculo é feito uma única vez e memorizado. Em uma implementação real os
- * mesmos resultados viriam da leitura dos registros do PEC.
+ * resultados calculados a partir dos registros disponíveis.
  */
 export function useEstratificacoes(): ResultadoEstratificacao[] {
   return useMemo(() => FAMILIAS_MOCK.map(calcularRiscoFamilia), [])

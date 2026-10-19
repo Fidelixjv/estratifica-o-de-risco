@@ -3,18 +3,16 @@
  *
  * Regras recebidas na tabela de requisitos:
  *
+ *   0 a 4 pontos    -> Risco habitual
  *   5 ou 6 pontos   -> R1 – Risco menor
  *   7 ou 8 pontos   -> R2 – Risco médio
- *   Acima de 9      -> R3 – Risco máximo
+ *   9 pontos ou mais -> R3 – Risco máximo
  *
- * IMPORTANTE: 0 a 4 pontos e exatamente 9 pontos NÃO possuem faixa definida na
- * metodologia recebida. Para essas pontuações o protótipo devolve
- * `{ nivel: null, descricao: 'Classificação não definida' }` e nenhuma faixa
- * nova é inventada. Para incluir as faixas faltantes basta acrescentar entradas
- * em `FAIXAS_CLASSIFICACAO`.
+ * Escores negativos não possuem faixa definida e retornam
+ * `{ nivel: null, descricao: 'Classificação não definida' }`.
  */
 
-export type NivelRisco = 'R1' | 'R2' | 'R3'
+export type NivelRisco = 'Habitual' | 'R1' | 'R2' | 'R3'
 
 export interface ClassificacaoRisco {
   nivel: NivelRisco | null
@@ -37,6 +35,13 @@ export const CLASSIFICACAO_NAO_DEFINIDA: ClassificacaoRisco = {
 /** Ordem de exibição das faixas no material de apoio da interface. */
 export const FAIXAS_CLASSIFICACAO: FaixaClassificacao[] = [
   {
+    descricaoFaixa: '0 a 4 pontos',
+    minimo: 0,
+    maximo: 4,
+    nivel: 'Habitual',
+    descricao: 'Risco habitual',
+  },
+  {
     descricaoFaixa: '5 ou 6 pontos',
     minimo: 5,
     maximo: 6,
@@ -51,8 +56,8 @@ export const FAIXAS_CLASSIFICACAO: FaixaClassificacao[] = [
     descricao: 'Risco médio',
   },
   {
-    descricaoFaixa: 'Acima de 9 pontos',
-    minimo: 10,
+    descricaoFaixa: '9 pontos ou mais',
+    minimo: 9,
     maximo: Number.POSITIVE_INFINITY,
     nivel: 'R3',
     descricao: 'Risco máximo',

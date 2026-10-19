@@ -45,7 +45,7 @@ function Item({ rotulo, valor }: { rotulo: string; valor: string }) {
   )
 }
 
-/** Informações do domicílio fictício usadas no cálculo das sentinelas. */
+/** Informações do domicílio usadas no cálculo das sentinelas. */
 export function HouseholdInfo({ domicilio, relacao, ultimaAnalise }: HouseholdInfoProps) {
   const percentual = relacao.proporcao === null ? 0 : Math.min(relacao.proporcao / 2, 1) * 100
 

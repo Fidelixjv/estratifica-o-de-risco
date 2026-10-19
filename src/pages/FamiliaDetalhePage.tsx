@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, Home, ListChecks, SearchX, Users } from 'lucide-react'
 import { Panel } from '../components/ui/Panel'
-import { PrototypeNotice } from '../components/ui/PrototypeNotice'
 import { EmptyState } from '../components/ui/EmptyState'
 import { CitizenCard } from '../components/family/CitizenCard'
 import { HouseholdInfo } from '../components/family/HouseholdInfo'
@@ -46,10 +45,9 @@ export function FamiliaDetalhePage() {
   if (!resultado) {
     return (
       <div className="space-y-6">
-        <PrototypeNotice />
         <EmptyState
           titulo="Família não encontrada"
-          descricao={`Nenhuma família fictícia cadastrada com o identificador "${id}".`}
+          descricao={`Nenhuma família cadastrada com o identificador "${id}".`}
           icone={SearchX}
         >
           <Link
@@ -76,8 +74,6 @@ export function FamiliaDetalhePage() {
         Voltar para as famílias
       </Link>
 
-      <PrototypeNotice />
-
       <section aria-labelledby="titulo-familia">
         <p className="text-sm font-semibold text-brand-700">{familia.id}</p>
         <h2 id="titulo-familia" className="mt-0.5 text-xl font-semibold text-slate-800 sm:text-2xl">
@@ -92,7 +88,7 @@ export function FamiliaDetalhePage() {
         selo="Seção 1"
         titulo="Informações da família"
         icone={Home}
-        descricao="Identificação do domicílio analisado pelo protótipo."
+        descricao="Identificação do domicílio analisado."
       >
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
@@ -117,9 +113,9 @@ export function FamiliaDetalhePage() {
         icone={Users}
         descricao={`${familia.membros.length} ${pluralizar(
           familia.membros.length,
-          'cidadão fictício vinculado',
-          'cidadãos fictícios vinculados',
-        )} ao domicílio. Nomes e datas são fictícios.`}
+          'cidadão vinculado',
+          'cidadãos vinculados',
+        )} ao domicílio.`}
       >
         <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
           {familia.membros.map((cidadao) => (

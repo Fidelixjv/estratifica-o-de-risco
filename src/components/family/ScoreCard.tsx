@@ -61,8 +61,8 @@ export function ScoreCard({ resultado }: ScoreCardProps) {
             <p className="mt-2 flex items-start gap-1.5 text-xs leading-relaxed text-slate-500">
               <CircleDot aria-hidden="true" className="mt-0.5 size-3.5 shrink-0" />
               <span>
-                Esta pontuação não possui faixa definida na metodologia apresentada, portanto o
-                protótipo não classifica o risco.
+                Esta pontuação não possui faixa definida na metodologia apresentada; o risco não
+                foi classificado.
               </span>
             </p>
           )}

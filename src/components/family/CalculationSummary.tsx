@@ -24,7 +24,7 @@ export function CalculationSummary({ resultado }: CalculationSummaryProps) {
           <div className="min-w-0">
             <h4 className="text-sm font-semibold text-slate-800">Dados utilizados</h4>
             <p className="mt-1 text-xs leading-relaxed text-slate-500">
-              Informações lidas do cadastro fictício do cidadão e do domicílio.
+              Informações do cadastro do cidadão e do domicílio.
             </p>
             <ul className="mt-2 space-y-2">
               {dadosUtilizados.map((grupo) => (
@@ -121,10 +121,9 @@ export function CalculationSummary({ resultado }: CalculationSummaryProps) {
             </div>
             {classificacao.nivel === null ? (
               <p className="mt-2 text-xs leading-relaxed text-slate-500">
-                A pontuação {escoreTotal}{' '}
-                {pluralizar(escoreTotal, 'ponto', 'pontos')} não está contemplada nas faixas
-                definidas pela metodologia apresentada (5 ou 6, 7 ou 8 e acima de 9 pontos), por isso
-                o protótipo exibe “Classificação não definida”.
+                A pontuação {escoreTotal} {pluralizar(escoreTotal, 'ponto', 'pontos')} não está
+                contemplada nas faixas válidas para risco habitual, R1, R2 ou R3; por isso, o
+                sistema exibe “Classificação não definida”.
               </p>
             ) : (
               <p className="mt-2 text-xs leading-relaxed text-slate-500">
@@ -147,21 +146,19 @@ export function CalculationSummary({ resultado }: CalculationSummaryProps) {
               </span>
               <span aria-hidden="true">→</span>
               <span>
-                {faixa.nivel} – {faixa.descricao}
+                {faixa.nivel === 'Habitual' ? faixa.descricao : `${faixa.nivel} – ${faixa.descricao}`}
               </span>
             </li>
           ))}
           <li className="flex flex-wrap items-center gap-2 text-xs text-slate-600">
             <span className="rounded bg-white px-2 py-0.5 font-semibold text-slate-700 ring-1 ring-slate-200">
-              0 a 4 pontos e exatamente 9 pontos
+              Escore fora das faixas válidas
             </span>
             <span aria-hidden="true">→</span>
-            <span>Classificação não definida na metodologia apresentada</span>
+            <span>Classificação não definida</span>
           </li>
         </ul>
       </div>
     </div>
   )
 }
-
-

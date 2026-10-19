@@ -1,9 +1,10 @@
 import type { LucideIcon } from 'lucide-react'
 
-export type Tom = 'brand' | 'emerald' | 'amber' | 'rose' | 'slate'
+export type Tom = 'brand' | 'teal' | 'emerald' | 'amber' | 'rose' | 'slate'
 
 const TONS: Record<Tom, { icone: string; valor: string }> = {
   brand: { icone: 'bg-brand-50 text-brand-700', valor: 'text-brand-800' },
+  teal: { icone: 'bg-teal-50 text-teal-700', valor: 'text-teal-800' },
   emerald: { icone: 'bg-emerald-50 text-emerald-700', valor: 'text-emerald-800' },
   amber: { icone: 'bg-amber-50 text-amber-700', valor: 'text-amber-800' },
   rose: { icone: 'bg-rose-50 text-rose-700', valor: 'text-rose-800' },

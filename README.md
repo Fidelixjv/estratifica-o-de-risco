@@ -27,13 +27,13 @@ A aplicação funciona inteiramente no navegador, sem depender de serviços exte
 ```
 Prontuário Eletrônico do Cidadão
               ↓
-Dados do cidadão  +  Dados do domicílio
+Dados do cadastro do cidadão  +  Dados do domicílio
               ↓
 Identificação das sentinelas
               ↓
 Cálculo da pontuação
               ↓
-Estratificação de risco (R1 / R2 / R3)
+Estratificação de risco (habitual / R1 / R2 / R3)
 ```
 
 ## Tabela de sentinelas aplicada
@@ -61,13 +61,12 @@ de moradores que apresentem o critério.
 
 | Escore total | Classificação |
 | --- | --- |
+| 0 a 4 pontos | Risco habitual |
 | 5 ou 6 pontos | R1 – Risco menor |
 | 7 ou 8 pontos | R2 – Risco médio |
-| Acima de 9 pontos | R3 – Risco máximo |
-| 0 a 4 pontos e exatamente 9 pontos | Classificação não definida |
+| 9 pontos ou mais | R3 – Risco máximo |
 
-As pontuações sem faixa definida **não recebem classificação**: o protótipo não cria regras que não
-foram fornecidas na metodologia.
+O risco habitual não recebe código R.
 
 ## Estrutura do projeto
 
@@ -92,7 +91,7 @@ src/
 │   └── estratificacao.test.ts
 ├── hooks/             # useEstratificacoes, useTituloPagina
 ├── lib/               # idade.ts, formatar.ts
-└── pages/             # Dashboard, Famílias, Detalhes da família, Sobre, 404
+└── pages/             # Dashboard, Famílias, Detalhes da família, 404
 ```
 
 ### Onde a regra científica mora
@@ -101,7 +100,7 @@ src/
   única definição, reutilizada tanto pelo cálculo quanto pelos cartões dos cidadãos, evitando
   divergência entre cálculo e interface.
 - `src/domain/classificacao.ts` — `classificarRisco(escoreTotal)`, com as faixas declaradas em
-  `FAIXAS_CLASSIFICACAO`.
+  `FAIXAS_CLASSIFICACAO` (risco habitual, R1, R2 e R3).
 - `src/domain/estratificacao.ts` — `calcularRiscoFamilia(familia)`: lê os dados fictícios, avalia
   cada sentinela, soma os pontos e classifica o risco. Nenhuma pontuação é digitada nos dados.
 
@@ -116,7 +115,8 @@ Para incluir novas sentinelas ou novas faixas de classificação, basta alterar 
 - **Maiores de 70 anos:** adotada a leitura de que é necessário ter completado 71 anos ou mais.
 - **Desnutrição grave e diabetes mellitus:** a metodologia não define critério operacional; é
   considerado o registro da condição no cadastro fictício.
-- **Faixas ausentes:** 0 a 4 pontos e exatamente 9 pontos permanecem sem classificação.
+- **Escore negativo:** não possui faixa de classificação. Os escores gerados pelos dados do
+  protótipo são não negativos.
 
 ## Responsividade e acessibilidade
 

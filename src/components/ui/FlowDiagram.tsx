@@ -10,8 +10,8 @@ import {
 
 const ETAPAS: { titulo: string; descricao: string; icone: LucideIcon }[] = [
   {
-    titulo: 'Prontuário Eletrônico do Cidadão',
-    descricao: 'Origem dos dados em uma implementação real. Neste protótipo, base fictícia.',
+    titulo: 'Cadastro do cidadão e do domicílio',
+    descricao: 'Informações do cidadão e do domicílio.',
     icone: Database,
   },
   {
@@ -31,12 +31,12 @@ const ETAPAS: { titulo: string; descricao: string; icone: LucideIcon }[] = [
   },
   {
     titulo: 'Estratificação de risco',
-    descricao: 'Classificação da família em R1, R2 ou R3.',
+    descricao: 'Classificação em risco habitual, R1, R2 ou R3.',
     icone: ShieldCheck,
   },
 ]
 
-/** Fluxo visual da solução apresentada no dashboard e na página "Sobre o projeto". */
+/** Fluxo visual da solução apresentada no dashboard. */
 export function FlowDiagram() {
   return (
     <ol className="flex flex-col gap-1">

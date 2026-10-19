@@ -3,7 +3,6 @@ import { SearchX, Users } from 'lucide-react'
 import { Panel } from '../components/ui/Panel'
 import { SearchBar } from '../components/ui/SearchBar'
 import { EmptyState } from '../components/ui/EmptyState'
-import { PrototypeNotice } from '../components/ui/PrototypeNotice'
 import { FamilyTable } from '../components/family/FamilyTable'
 import { FamilyCard } from '../components/family/FamilyCard'
 import { useEstratificacoes } from '../hooks/useEstratificacoes'
@@ -41,15 +40,13 @@ export function FamiliasPage() {
 
   return (
     <div className="space-y-6">
-      <PrototypeNotice />
-
       <section aria-labelledby="titulo-familias">
         <h2 id="titulo-familias" className="text-xl font-semibold text-slate-800 sm:text-2xl">
-          Famílias fictícias analisadas
+          Famílias analisadas
         </h2>
         <p className="mt-1 max-w-3xl text-sm leading-relaxed text-slate-600">
           Selecione uma família para ver seus moradores, as informações do domicílio, as sentinelas
-          identificadas e a classificação de risco calculada pelo protótipo.
+          identificadas e a classificação de risco calculada.
         </p>
       </section>
 
@@ -64,15 +61,15 @@ export function FamiliasPage() {
           valor={busca}
           aoAlterar={setBusca}
           rotulo="Buscar família"
-          descricao="Busque pelo identificador da família, do domicílio ou pelo nome fictício do morador."
-          placeholder="Ex.: FAM-003, DEMO-007 ou Pessoa 01"
+          descricao="Busque pelo identificador da família, do domicílio ou pelo nome do morador."
+          placeholder="Ex.: FAM-003, DOM-007 ou Pessoa 01"
         />
 
         <div className="mt-5">
           {filtradas.length === 0 ? (
             <EmptyState
               titulo="Nenhuma família encontrada"
-              descricao="Ajuste o termo da busca para localizar uma família fictícia cadastrada."
+              descricao="Ajuste o termo da busca para localizar uma família cadastrada."
               icone={SearchX}
             >
               <button
@@ -102,8 +99,7 @@ export function FamiliasPage() {
 
         <p className="mt-4 text-xs leading-relaxed text-slate-500">
           Exibindo{' '}
-          {filtradas.length} {pluralizar(filtradas.length, 'resultado', 'resultados')}. Os
-          identificadores seguem o padrão fictício “FAM-00X” e “DOM-DEMO-00X”.
+          {filtradas.length} {pluralizar(filtradas.length, 'resultado', 'resultados')}.
         </p>
       </Panel>
     </div>

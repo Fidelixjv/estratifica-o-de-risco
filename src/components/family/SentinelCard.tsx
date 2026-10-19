@@ -7,7 +7,7 @@ interface SentinelCardProps {
   familia: Familia
 }
 
-/** Nome da pessoa relacionada à sentinela (ids fictícios do cadastro). */
+/** Nome da pessoa relacionada à sentinela. */
 function rotuloMembros(sentinela: AvaliacaoSentinela, familia: Familia): string[] {
   return sentinela.membrosRelacionados
     .map((id) => familia.membros.find((membro) => membro.id === id)?.nome ?? id)

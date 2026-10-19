@@ -39,13 +39,9 @@ export function AppLayout() {
         <footer className="border-t border-slate-200 bg-white">
           <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
             <p className="text-sm font-semibold text-slate-700">
-              Protótipo acadêmico — Automatização da Estratificação de Risco Familiar
+              Automatização da Estratificação de Risco Familiar
             </p>
-            <p className="mt-1 max-w-3xl text-xs leading-relaxed text-slate-500">
-              Trabalho de Conclusão de Curso. Todos os dados apresentados são fictícios e foram
-              criados exclusivamente para demonstração. O protótipo não realiza integração com o
-              Prontuário Eletrônico do Cidadão (PEC) nem com sistemas governamentais de saúde.
-            </p>
+            <p className="mt-1 text-xs text-slate-500">Trabalho de Conclusão de Curso</p>
           </div>
         </footer>
       </div>

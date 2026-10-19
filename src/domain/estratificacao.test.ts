@@ -5,7 +5,7 @@ import { PONTOS_PADRAO } from './sentinels'
 import { FAMILIAS_MOCK } from '../data/familiasMock'
 import type { Familia } from './types'
 
-/** Domicílio fictício mínimo, usado para testar as regras isoladamente. */
+/** Domicílio mínimo, usado para testar as regras isoladamente. */
 function familiaBase(overrides: Partial<Familia> = {}): Familia {
   return {
     id: 'FAM-TEST',
@@ -16,7 +16,7 @@ function familiaBase(overrides: Partial<Familia> = {}): Familia {
     domicilio: {
       id: 'DOM-TEST',
       identificacao: 'Domicílio de teste',
-      localizacaoFicticia: 'Endereço fictício',
+      localizacaoFicticia: 'Endereço de teste',
       numeroMoradores: 0,
       numeroComodos: 3,
       lixoACeuAberto: false,
@@ -48,6 +48,12 @@ function cidadaoBase(overrides: Record<string, unknown> = {}) {
 }
 
 describe('classificarRisco', () => {
+  it('classifica de 0 a 4 pontos como risco habitual', () => {
+    for (const escore of [0, 1, 2, 3, 4]) {
+      expect(classificarRisco(escore)).toEqual({ nivel: 'Habitual', descricao: 'Risco habitual' })
+    }
+  })
+
   it('classifica 5 e 6 pontos como R1 – risco menor', () => {
     expect(classificarRisco(5)).toEqual({ nivel: 'R1', descricao: 'Risco menor' })
     expect(classificarRisco(6)).toEqual({ nivel: 'R1', descricao: 'Risco menor' })
@@ -58,18 +64,17 @@ describe('classificarRisco', () => {
     expect(classificarRisco(8)).toEqual({ nivel: 'R2', descricao: 'Risco médio' })
   })
 
-  it('classifica acima de 9 pontos como R3 – risco máximo', () => {
+  it('classifica 9 pontos ou mais como R3 – risco máximo', () => {
+    expect(classificarRisco(9)).toEqual({ nivel: 'R3', descricao: 'Risco máximo' })
     expect(classificarRisco(10)).toEqual({ nivel: 'R3', descricao: 'Risco máximo' })
     expect(classificarRisco(28)).toEqual({ nivel: 'R3', descricao: 'Risco máximo' })
   })
 
-  it('não inventa classificação para 0 a 4 pontos e para exatamente 9 pontos', () => {
-    for (const escore of [0, 1, 2, 3, 4, 9]) {
-      expect(classificarRisco(escore)).toEqual({
-        nivel: null,
-        descricao: 'Classificação não definida',
-      })
-    }
+  it('não classifica escores negativos', () => {
+    expect(classificarRisco(-1)).toEqual({
+      nivel: null,
+      descricao: 'Classificação não definida',
+    })
   })
 })
 
@@ -79,7 +84,7 @@ describe('calcularRiscoFamilia', () => {
 
     expect(resultado.escoreTotal).toBe(0)
     expect(resultado.sentinelasIdentificadas).toHaveLength(0)
-    expect(resultado.classificacao.nivel).toBeNull()
+    expect(resultado.classificacao).toEqual({ nivel: 'Habitual', descricao: 'Risco habitual' })
   })
 
   it('calcula a relação morador/cômodo por faixa', () => {
@@ -246,7 +251,7 @@ describe('calcularRiscoFamilia', () => {
   })
 })
 
-describe('dados fictícios de demonstração', () => {
+describe('dados de famílias', () => {
   const resultados = FAMILIAS_MOCK.map(calcularRiscoFamilia)
 
   const escoresEsperados: Record<string, number> = {
@@ -268,13 +273,20 @@ describe('dados fictícios de demonstração', () => {
     expect(resultado.escoreTotal).toBe(esperado)
   })
 
-  it('cobre todas as faixas de classificação e também pontuações sem faixa', () => {
+  it('cobre todas as faixas de classificação, incluindo os limites 0 e 9', () => {
     const niveis = resultados.map((resultado) => resultado.classificacao.nivel)
 
+    expect(resultados.find((resultado) => resultado.escoreTotal === 0)?.classificacao.nivel).toBe(
+      'Habitual',
+    )
+    expect(resultados.find((resultado) => resultado.escoreTotal === 9)?.classificacao.nivel).toBe(
+      'R3',
+    )
     expect(niveis).toContain('R1')
     expect(niveis).toContain('R2')
     expect(niveis).toContain('R3')
-    expect(niveis).toContain(null)
+    expect(niveis).toContain('Habitual')
+    expect(niveis).not.toContain(null)
   })
 
   it('não utiliza nomes reais: todos os moradores são "Pessoa NN"', () => {
